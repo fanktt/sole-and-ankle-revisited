@@ -1,13 +1,14 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react"
+import styled from "styled-components/macro"
 
-import { COLORS, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
+import { COLORS, WEIGHTS, QUERIES } from "../../constants"
+import Logo from "../Logo"
+import SuperHeader from "../SuperHeader"
+import MobileMenu from "../MobileMenu"
+import Icon from "../Icon"
 
 const Header = () => {
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false)
 
   // For our mobile hamburger menu, we'll want to use a button
   // with an onClick handler, something like this:
@@ -28,8 +29,17 @@ const Header = () => {
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
+          <NavMobileButton>
+            <Icon id="search" size="24"></Icon>
+          </NavMobileButton>
+          <NavMobileButton>
+            <Icon id="shopping-bag" size="24"></Icon>
+          </NavMobileButton>
+          <NavMobileButton onClick={() => setShowMobileMenu(true)}>
+            <Icon id="menu" size="24"></Icon>
+          </NavMobileButton>
         </Nav>
-        <Side />
+        <LaptopUpSide />
       </MainHeader>
 
       <MobileMenu
@@ -37,8 +47,8 @@ const Header = () => {
         onDismiss={() => setShowMobileMenu(false)}
       />
     </header>
-  );
-};
+  )
+}
 
 const MainHeader = styled.div`
   display: flex;
@@ -46,17 +56,30 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
-`;
+`
 
 const Nav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
-`;
+
+  @media ${QUERIES.laptopAndDown} {
+    gap: 40px;
+    margin: 0;
+  }
+`
 
 const Side = styled.div`
   flex: 1;
-`;
+`
+
+const LaptopUpSide = styled.div`
+  flex: 1;
+
+  @media ${QUERIES.laptopAndDown} {
+    display: none;
+  }
+`
 
 const NavLink = styled.a`
   font-size: 1.125rem;
@@ -68,6 +91,18 @@ const NavLink = styled.a`
   &:first-of-type {
     color: ${COLORS.secondary};
   }
-`;
 
-export default Header;
+  @media ${QUERIES.laptopAndDown} {
+    display: none;
+  }
+`
+
+const NavMobileButton = styled.a`
+  display: none;
+
+  @media ${QUERIES.laptopAndDown} {
+    display: block;
+  }
+`
+
+export default Header
