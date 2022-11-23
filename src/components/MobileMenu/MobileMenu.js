@@ -47,7 +47,7 @@ const Overlay = styled(DialogOverlay)`
   left: 0;
   right: 0;
   bottom: 0;
-  background: hsl(220deg 6% 40% / 0.8);
+  background: var(--color-backdrop);
 
   @media ${QUERIES.laptopAndDown} {
     display: block;
@@ -91,7 +91,7 @@ const Nav = styled.nav`
 `
 
 const NavLink = styled.a`
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
   font-size: ${18 / 16}rem;
   font-weight: ${WEIGHTS.medium};
   text-decoration: none;
@@ -99,7 +99,7 @@ const NavLink = styled.a`
   text-transform: uppercase;
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `
 
@@ -110,7 +110,7 @@ const Footer = styled.footer`
 `
 
 const FooterLink = styled.a`
-  color: ${COLORS.gray[700]};
+  color: var(--color-gray-700);
   font-size: ${14 / 16}rem;
   font-weight: ${WEIGHTS.normal};
   text-decoration: none;
