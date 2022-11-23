@@ -1,14 +1,16 @@
-import React from "react"
-import styled from "styled-components/macro"
+import React from 'react';
+import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS, QUERIES } from "../../constants"
-import Logo from "../Logo"
-import SuperHeader from "../SuperHeader"
-import MobileMenu from "../MobileMenu"
-import Icon from "../Icon"
+import { WEIGHTS, QUERIES } from '../../constants';
+import Logo from '../Logo';
+import SuperHeader from '../SuperHeader';
+import MobileMenu from '../MobileMenu';
+import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from '../UnstyledButton';
 
 const Header = () => {
-  const [showMobileMenu, setShowMobileMenu] = React.useState(false)
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
   // For our mobile hamburger menu, we'll want to use a button
   // with an onClick handler, something like this:
@@ -19,27 +21,32 @@ const Header = () => {
     <header>
       <SuperHeader />
       <MainHeader>
-        <Side>
+        <LogoWrapper>
           <Logo />
-        </Side>
-        <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
-          <NavMobileButton>
-            <Icon id="search" size="24"></Icon>
-          </NavMobileButton>
-          <NavMobileButton>
-            <Icon id="shopping-bag" size="24"></Icon>
-          </NavMobileButton>
-          <NavMobileButton onClick={() => setShowMobileMenu(true)}>
-            <Icon id="menu" size="24"></Icon>
-          </NavMobileButton>
-        </Nav>
-        <LaptopUpSide />
+        </LogoWrapper>
+        <DesktopNav>
+          <NavLink href='/sale'>Sale</NavLink>
+          <NavLink href='/new'>New&nbsp;Releases</NavLink>
+          <NavLink href='/men'>Men</NavLink>
+          <NavLink href='/women'>Women</NavLink>
+          <NavLink href='/kids'>Kids</NavLink>
+          <NavLink href='/collections'>Collections</NavLink>
+        </DesktopNav>
+        <MobileActions>
+          <ShoppingBagButton>
+            <Icon id='shopping-bag' />
+            <VisuallyHidden>Open cart</VisuallyHidden>
+          </ShoppingBagButton>
+          <UnstyledButton>
+            <Icon id='search' />
+            <VisuallyHidden>Search</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+            <Icon id='menu' />
+            <VisuallyHidden>Open menu</VisuallyHidden>
+          </UnstyledButton>
+        </MobileActions>
+        <Filler />
       </MainHeader>
 
       <MobileMenu
@@ -47,8 +54,8 @@ const Header = () => {
         onDismiss={() => setShowMobileMenu(false)}
       />
     </header>
-  )
-}
+  );
+};
 
 const MainHeader = styled.div`
   display: flex;
@@ -58,28 +65,39 @@ const MainHeader = styled.div`
   border-bottom: 1px solid var(--color-gray-300);
   overflow-x: auto;
   overflow-y: hidden;
-`
 
-const Nav = styled.nav`
+  @media ${QUERIES.tabletAndDown} {
+    justify-content: space-between;
+    align-items: center;
+    border-top: 4px solid var(--color-gray-900);
+  }
+
+  @media ${QUERIES.phoneAndDown} {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+`;
+
+const DesktopNav = styled.nav`
   display: flex;
   gap: clamp(1rem, 10vw - 5rem, 3rem);
   margin: 0px 48px;
   @media ${QUERIES.tabletAndDown} {
-    margin: 0;
+    display: none;
   }
-`
+`;
 
 const Side = styled.div`
   flex: 1;
-`
+`;
 
-const LaptopUpSide = styled.div`
+const Filler = styled.div`
   flex: 1;
 
   @media ${QUERIES.tabletAndDown} {
     display: none;
   }
-`
+`;
 
 const NavLink = styled.a`
   font-size: 1.125rem;
@@ -91,18 +109,31 @@ const NavLink = styled.a`
   &:first-of-type {
     color: var(--color-secondary);
   }
+`;
 
-  @media ${QUERIES.tabletAndDown} {
-    display: none;
-  }
-`
-
-const NavMobileButton = styled.a`
+const MobileActions = styled.div`
   display: none;
 
   @media ${QUERIES.tabletAndDown} {
-    display: block;
+    display: flex;
+    gap: 32px;
   }
-`
 
-export default Header
+  @media ${QUERIES.phoneAndDown} {
+    gap: 16px;
+  }
+`;
+
+const LogoWrapper = styled.div`
+  flex: 1;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex: revert;
+  }
+`;
+
+const ShoppingBagButton = styled(UnstyledButton)`
+  transform: translateX(-2px);
+`;
+
+export default Header;
