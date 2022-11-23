@@ -56,15 +56,15 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
+  overflow-y: hidden;
 `
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1rem, 10vw - 5rem, 3rem);
   margin: 0px 48px;
-
-  @media ${QUERIES.laptopAndDown} {
-    gap: 40px;
+  @media ${QUERIES.tabletAndDown} {
     margin: 0;
   }
 `
@@ -76,7 +76,7 @@ const Side = styled.div`
 const LaptopUpSide = styled.div`
   flex: 1;
 
-  @media ${QUERIES.laptopAndDown} {
+  @media ${QUERIES.tabletAndDown} {
     display: none;
   }
 `
@@ -92,7 +92,7 @@ const NavLink = styled.a`
     color: ${COLORS.secondary};
   }
 
-  @media ${QUERIES.laptopAndDown} {
+  @media ${QUERIES.tabletAndDown} {
     display: none;
   }
 `
@@ -100,7 +100,7 @@ const NavLink = styled.a`
 const NavMobileButton = styled.a`
   display: none;
 
-  @media ${QUERIES.laptopAndDown} {
+  @media ${QUERIES.tabletAndDown} {
     display: block;
   }
 `
