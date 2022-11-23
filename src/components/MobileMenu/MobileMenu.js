@@ -1,44 +1,44 @@
 /* eslint-disable no-unused-vars */
-import React from "react"
-import styled from "styled-components/macro"
-import { DialogOverlay, DialogContent } from "@reach/dialog"
+import React from 'react';
+import styled from 'styled-components/macro';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
 
-import { QUERIES, WEIGHTS, COLORS } from "../../constants"
+import { QUERIES, WEIGHTS, COLORS } from '../../constants';
 
-import UnstyledButton from "../UnstyledButton"
-import Icon from "../Icon"
-import VisuallyHidden from "../VisuallyHidden"
+import UnstyledButton from '../UnstyledButton';
+import Icon from '../Icon';
+import VisuallyHidden from '../VisuallyHidden';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
   if (!isOpen) {
-    return null
+    return null;
   }
 
   return (
-    <Overlay isOpen={isOpen} onClick={onDismiss}>
-      <Content>
+    <Overlay isOpen={isOpen} onDismiss={onDismiss}>
+      <Content aria-label='Menu'>
         <CloseButton onClick={onDismiss}>
-          <Icon id="close" size="24"></Icon>
+          <Icon id='close' size='24'></Icon>
           <VisuallyHidden>Dismiss modal</VisuallyHidden>
         </CloseButton>
-        <Side />
+        <Filler />
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href='/sale'>Sale</NavLink>
+          <NavLink href='/new'>New&nbsp;Releases</NavLink>
+          <NavLink href='/men'>Men</NavLink>
+          <NavLink href='/women'>Women</NavLink>
+          <NavLink href='/kids'>Kids</NavLink>
+          <NavLink href='/collections'>Collections</NavLink>
         </Nav>
         <Footer>
-          <FooterLink href="/terms">Terms and Conditions</FooterLink>
-          <FooterLink href="/privacy">Privacy Policy</FooterLink>
-          <FooterLink href="/contact">Contact Us</FooterLink>
+          <FooterLink href='/terms'>Terms and Conditions</FooterLink>
+          <FooterLink href='/privacy'>Privacy Policy</FooterLink>
+          <FooterLink href='/contact'>Contact Us</FooterLink>
         </Footer>
       </Content>
     </Overlay>
-  )
-}
+  );
+};
 
 const Overlay = styled(DialogOverlay)`
   display: none;
@@ -52,7 +52,7 @@ const Overlay = styled(DialogOverlay)`
   @media ${QUERIES.laptopAndDown} {
     display: block;
   }
-`
+`;
 
 const Content = styled(DialogContent)`
   position: absolute;
@@ -69,26 +69,25 @@ const Content = styled(DialogContent)`
     flex-direction: column;
     justify-content: space-between;
   }
-`
+`;
 
 const CloseButton = styled(UnstyledButton)`
   position: absolute;
-  top: 20px;
-  right: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const Side = styled.div`
+  top: 10px;
+  right: 0;
+  padding: 16px;
+`;
+
+const Filler = styled.div`
   flex: 1;
-`
+`;
 
 const Nav = styled.nav`
-  flex: 2;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 22px;
-`
+  gap: 16px;
+`;
 
 const NavLink = styled.a`
   color: var(--color-gray-900);
@@ -101,13 +100,15 @@ const NavLink = styled.a`
   &:first-of-type {
     color: var(--color-secondary);
   }
-`
+`;
 
 const Footer = styled.footer`
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 14px;
-`
+`;
 
 const FooterLink = styled.a`
   color: var(--color-gray-700);
@@ -115,6 +116,6 @@ const FooterLink = styled.a`
   font-weight: ${WEIGHTS.normal};
   text-decoration: none;
   line-height: 1rem;
-`
+`;
 
-export default MobileMenu
+export default MobileMenu;
