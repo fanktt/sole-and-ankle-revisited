@@ -61,10 +61,8 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid var(--color-gray-300);
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto;
 
   @media ${QUERIES.tabletAndDown} {
     justify-content: space-between;
